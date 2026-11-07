@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: b2-video-library
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn 'app:create_app()'
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: B2_REGION
+        value: us-east-1
+      - key: MAX_VIDEOS
+        value: "200"
+      - key: PRESIGNED_URL_TTL
+        value: "3600"
+      - key: B2_ENDPOINT_URL
+        sync: false
+      - key: B2_BUCKET_NAME
+        sync: false
+      - key: B2_KEY_ID
+        sync: false
+      - key: B2_APPLICATION_KEY
+        sync: false
+      - key: B2_PREFIX
+        value: ""
